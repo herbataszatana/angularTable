@@ -8,15 +8,23 @@ import { Component } from '@angular/core';
 export class UsersComponent {
 
   fetchedData = [
-    { name: 'John', lastname: 'Doe', dob: '13/12/88', id: '8693' },
-    { name: 'Jane', lastname: 'Doe', dob: '13/12/80', id: '8603' },
-    // Add more data if needed
+    { name: 'John', lastname: 'Holt', dob: '13/12/88', id: '8693' },
+    { name: 'Anna', lastname: 'Doe', dob: '07/06/95', id: '8605' },
+    { name: 'Jane', lastname: 'Smith', dob: '13/12/80', id: '8603' },
+    { name: 'Sam', lastname: 'Idol', dob: '04/01/91', id: '8693' },
+    { name: 'Jimmy', lastname: 'Peralta', dob: '30/11/88', id: '8603' },
+    { name: 'Jimmy', lastname: 'Jones', dob: '05/10/78', id: '8603' },
   ];
 
-  tableSettings = ['name', 'lastname', 'dob']; // Define columns to display
+  columnDisplayNames: { [key: string]: string } = {
+    'name': 'First Name',
+    'lastname': 'Last Name',
+    'dob': 'Date of Birth'
+  };
+
+  tableSettings = ['name', 'lastname', 'dob']; 
 
   onItemClicked(item: any) {
-    console.log('Clicked item:', item); // Perform actions based on the clicked item
-    // Add your logic here to handle item clicks in UserComponent
+    console.log('Clicked item:', item); 
   }
 }

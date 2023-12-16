@@ -1,11 +1,16 @@
-<table>
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
       <th *ngFor="let column of settings">{{ column }}</th>
     </tr>
+    <tr>
+      <th *ngFor="let column of settings">
+        <input type="text" placeholder="Filter..." (input)="onFilterChange(column, $event)">
+      </th>
+    </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of data" (click)="onRowClick(item)">
+    <tr *ngFor="let item of filteredData" (click)="onRowClick(item)">
       <td *ngFor="let column of settings">{{ item[column] }}</td>
     </tr>
   </tbody>
