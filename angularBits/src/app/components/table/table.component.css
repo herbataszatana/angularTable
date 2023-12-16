@@ -1,24 +1,23 @@
-/* Add border between columns */
+
 .table th,
 .table td {
   border-right: 1px solid #ccc;
   padding: 8px;
-  background-color: #fff; /* Set the background color for all rows */
+  background-color: #fff;
 }
 
-/* Remove border for last column */
+
 .table th:last-child,
 .table td:last-child {
   border-right: none;
 }
 
-/* Highlight rows on hover */
+
 .table tbody tr:hover {
   background-color: #f0f0f0;
-  cursor: pointer; /* Change to your preferred hover color */
+  cursor: pointer;
 }
 
-/* Disable Bootstrap's default row hover */
 .table tbody tr:hover td,
 .table tbody tr:hover th {
   background-color: transparent !important;
