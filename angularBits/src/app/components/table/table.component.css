@@ -14,11 +14,16 @@
 
 /* Highlight rows on hover */
 .table tbody tr:hover {
-  background-color: #f0f0f0; /* Change to your preferred hover color */
+  background-color: #f0f0f0;
+  cursor: pointer; /* Change to your preferred hover color */
 }
 
 /* Disable Bootstrap's default row hover */
 .table tbody tr:hover td,
 .table tbody tr:hover th {
   background-color: transparent !important;
+}
+
+.sortable-header {
+  cursor: pointer;
 }

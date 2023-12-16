@@ -11,6 +11,8 @@ export class TableComponent {
   @Output() rowClicked: EventEmitter<any> = new EventEmitter<any>();
 
   filteredData: any[] = [];
+  sortColumn: string | null = null;
+  sortDirection: 'asc' | 'desc' = 'asc';
 
   ngOnInit() {
     this.filteredData = [...this.data];
@@ -26,5 +28,33 @@ export class TableComponent {
       const itemValue = item[column].toString().toLowerCase();
       return itemValue.includes(value.toLowerCase());
     });
+  }
+
+  onHeaderClick(column: string) {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+
+    this.sortData();
+  }
+
+  sortData() {
+    if (this.sortColumn !== null) {
+      this.filteredData.sort((a, b) => {
+        const valueA = a[this.sortColumn!];
+        const valueB = b[this.sortColumn!];
+  
+        if (valueA < valueB) {
+          return this.sortDirection === 'asc' ? -1 : 1;
+        } else if (valueA > valueB) {
+          return this.sortDirection === 'asc' ? 1 : -1;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 }
