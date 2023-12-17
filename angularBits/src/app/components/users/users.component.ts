@@ -16,13 +16,20 @@ export class UsersComponent {
     { name: 'Jimmy', lastname: 'Jones', dob: '05/10/78', id: '8603' },
   ];
 
-  columnDisplayNames: { [key: string]: string } = {
-    'name': 'First Name',
-    'lastname': 'Last Name',
-    'dob': 'Date of Birth'
+  columnDisplayNames: { [key: string]: string[] } = {
+    'name': [],
+    'lastname': [],
+    'dob': [],
+    'actions': ['Update', 'Delete'] // Actions for the 'actions' column
   };
 
-  tableSettings = ['name', 'lastname', 'dob']; 
+  tableSettings = ['name', 'lastname', 'dob', 'actions'];
+
+  onActionClicked(action: string, item: any) {
+    console.log(`Clicked action '${action}' for item:`, item);
+    // Perform action based on the action type and item data
+    // Add your logic here to handle different actions
+  }
 
   onItemClicked(item: any) {
     console.log('Clicked item:', item); 

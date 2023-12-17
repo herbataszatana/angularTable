@@ -8,7 +8,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class TableComponent {
   @Input() data: any[] = [];
   @Input() settings: string[] = [];
+  @Input() columnDisplayNames: { [key: string]: string[] } = {}; // Updated input for column display names
+
   @Output() rowClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() actionClicked: EventEmitter<{ action: string, item: any }> = new EventEmitter<{ action: string, item: any }>();
 
   filteredData: any[] = [];
   sortColumn: string | null = null;
@@ -30,6 +33,10 @@ export class TableComponent {
     });
   }
 
+  onActionClick(action: string, item: any) {
+    this.actionClicked.emit({ action: action, item: item });
+  }
+
   onHeaderClick(column: string) {
     if (this.sortColumn === column) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
@@ -46,7 +53,7 @@ export class TableComponent {
       this.filteredData.sort((a, b) => {
         const valueA = a[this.sortColumn!];
         const valueB = b[this.sortColumn!];
-  
+
         if (valueA < valueB) {
           return this.sortDirection === 'asc' ? -1 : 1;
         } else if (valueA > valueB) {
