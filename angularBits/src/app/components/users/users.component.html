@@ -3,11 +3,7 @@
     [data]="fetchedData" 
     [settings]="tableSettings" 
     [columnDisplayNames]="columnDisplayNames"
-
+    (rowClicked)="onItemClicked($event) "
     (actionClicked)="onActionClicked($event.action, $event.item)"
     >
 </app-table>
-<!--
-    Rowclick option 
-    (rowClicked)="onItemClicked($event) "
--->

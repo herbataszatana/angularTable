@@ -8,7 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class TableComponent {
   @Input() data: any[] = [];
   @Input() settings: string[] = [];
-  @Input() columnDisplayNames: { [key: string]: string[] } = {}; // Updated input for column display names
+  @Input() columnDisplayNames: { [key: string]: string[] } = {}; 
 
   @Output() rowClicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() actionClicked: EventEmitter<{ action: string, item: any }> = new EventEmitter<{ action: string, item: any }>();

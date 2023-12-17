@@ -2,7 +2,7 @@
   <thead class="thead-dark">
     <tr>
       <th *ngFor="let column of settings" (click)="onHeaderClick(column)" class="sortable-header">
-        {{ column }}
+        {{ columnDisplayNames[column].length ? columnDisplayNames[column][0] : column }}
         <span *ngIf="sortColumn === column">
           {{ sortDirection === 'asc' ? '▲' : '▼' }}
         </span>
