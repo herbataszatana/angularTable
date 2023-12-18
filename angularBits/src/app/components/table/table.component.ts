@@ -1,16 +1,32 @@
 import { Component, Input, Output, EventEmitter,  } from '@angular/core';
 import { ActionDisplayType } from '../users/users.component';
+
+interface Action {
+  label: string;
+  displayType: ActionDisplayType;
+  icon?: string; 
+}
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'] 
 })
+
+
 export class TableComponent {
 
   @Input() data: any[] = [];
   @Input() settings: string[] = [];
-  @Input() columnDisplayNames: { [key: string]: { label: string, displayType: ActionDisplayType, icon?: string }[] } = {};
+ // @Input() columnDisplayNames: { [key: string]: { label: string, displayType: ActionDisplayType, icon?: string }[] } = {};
 
+ @Input()
+ columnDisplayNames: {
+   [key: string]: {
+     headerLabel?: string;
+     actions?: Action[]; 
+   }
+ } = {};
   @Output() rowClicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() actionClicked: EventEmitter<{ action: string, item: any }> = new EventEmitter<{ action: string, item: any }>();
 
@@ -64,4 +80,19 @@ export class TableComponent {
       });
     }
   }
+
+  getHeaderLabel(column: string) {
+    const config = this.columnDisplayNames[column];
+    
+    if (config && config.headerLabel) {
+      return config.headerLabel;
+    }
+
+    if (config && config.actions && config.actions.length) {
+      return config.actions[0].label;
+    }
+    
+    return column;
+  }
+
 }

@@ -7,6 +7,15 @@ export enum ActionDisplayType {
   ICON = 'icon'
 }
 
+export interface ColumnDisplay {
+  headerLabel?: string; 
+  actions?: {
+    label: string;
+    displayType: ActionDisplayType; 
+    icon?: string;
+  }[];
+}
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -24,15 +33,39 @@ export class UsersComponent {
     { name: 'Jimmy', lastname: 'Jones', dob: '05/10/78', id: '8603' },
   ];
 
-  columnDisplayNames: { [key: string]: { label: string, displayType: ActionDisplayType, icon?: string }[] } = {
-    'name': [{ label: 'First Name', displayType: ActionDisplayType.STRING }],
-    'lastname': [{ label: 'Last Name', displayType: ActionDisplayType.STRING }],
-    'dob': [{ label: 'Date of Birth', displayType: ActionDisplayType.STRING }],
-    'actions': [
-      { label: 'Send', displayType: ActionDisplayType.STRING, icon: '' },
-      { label: 'Delete', displayType: ActionDisplayType.ICON, icon: 'fa fa-trash' },
-      { label: 'Update', displayType: ActionDisplayType.BUTTON, icon: '' }
-    ]
+  columnDisplayNames: { 
+    [key: string]: ColumnDisplay  
+  } = {
+
+    name: {
+      headerLabel: 'First Name',
+    },
+    lastName: {
+      headerLabel: 'Last Name',
+    },
+    dob: {
+      headerLabel: 'Date of birth',
+    },
+    actions: {
+      headerLabel: 'Actions',
+      actions: [
+        {
+          label: 'Send',
+          displayType: ActionDisplayType.STRING,
+         // icon: 'fa fa-paper-plane'
+        },
+        {  
+          label: 'Edit',
+          displayType: ActionDisplayType.BUTTON
+        },
+        {
+          label: 'Delete',
+          displayType: ActionDisplayType.ICON,
+          icon: 'fa fa-trash'
+        }
+      ]  
+    }
+  
   };
 
   tableSettings = ['name', 'lastname', 'dob', 'actions'];
