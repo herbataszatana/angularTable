@@ -1,14 +1,15 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-
+import { Component, Input, Output, EventEmitter,  } from '@angular/core';
+import { ActionDisplayType } from '../users/users.component';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'] 
 })
 export class TableComponent {
+
   @Input() data: any[] = [];
   @Input() settings: string[] = [];
-  @Input() columnDisplayNames: { [key: string]: string[] } = {}; 
+  @Input() columnDisplayNames: { [key: string]: { label: string, displayType: ActionDisplayType, icon?: string }[] } = {};
 
   @Output() rowClicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() actionClicked: EventEmitter<{ action: string, item: any }> = new EventEmitter<{ action: string, item: any }>();
@@ -36,7 +37,6 @@ export class TableComponent {
   onActionClick(action: string, item: any) {
     this.actionClicked.emit({ action: action, item: item });
   }
-
   onHeaderClick(column: string) {
     if (this.sortColumn === column) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
